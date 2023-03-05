@@ -2,47 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yes_watching_app/common/constants.dart';
 import 'package:yes_watching_app/common/widget/bottom_navbar.dart';
-import 'package:yes_watching_app/features/trending/presentation/widgets/trending_item_widget.dart';
+import 'package:yes_watching_app/features/movies/presentation/widgets/movie_item_widget.dart';
 
-import '../bloc/trending_bloc.dart';
+import '../bloc/movies_bloc.dart';
 
-class TrendingPage extends StatefulWidget {
-  const TrendingPage({super.key});
+class MoviePage extends StatefulWidget {
+  const MoviePage({super.key});
 
   @override
-  State<TrendingPage> createState() => _TrendingPageState();
+  State<MoviePage> createState() => _MoviePageState();
 }
 
-class _TrendingPageState extends State<TrendingPage> {
+class _MoviePageState extends State<MoviePage> {
   int _selectIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
-        title: const Text('Trending Everyday'),
+        title: const Text('Movie Everyday'),
       ),
       body: SafeArea(
-        child: BlocBuilder<TrendingBloc, TrendingState>(
+        child: BlocBuilder<MoviesBloc, MoviesState>(
           builder: (context, state) {
-            if (state is TrendingLoaded) {
+            if (state is PopularMovieLoaded) {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.75,
                 ),
                 itemBuilder: (context, index) {
-                  return TrendingItemWidget(item: state.trendings[index]);
+                  return MovieItemWidget(item: state.movies[index]);
                 },
-                itemCount: state.trendings.length,
+                itemCount: state.movies.length,
               );
             }
-            if (state is TrendingLoading) {
+            if (state is PopularMovieLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is TrendingFailed) {
+            if (state is PopularMovieFailed) {
               return Center(
                 child: Text(state.message),
               );
@@ -54,7 +54,9 @@ class _TrendingPageState extends State<TrendingPage> {
           },
         ),
       ),
-      bottomNavigationBar: const WatchBottomNavbar(index: 0,),
+      bottomNavigationBar: const WatchBottomNavbar(
+        index: 1,
+      ),
     );
   }
 }

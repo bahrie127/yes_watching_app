@@ -62,11 +62,12 @@ void main() {
     final result = await repository.getTrendingAll();
     final resultList = result.getOrElse(() => []);
     expect(
-        resultList,
-        trendingResponse.results!
-            .map(
-              (e) => e.toEntity(),
-            )
-            .toList());
+      resultList,
+      trendingResponse.results!
+          .map(
+            (e) => e.toEntity(),
+          )
+          .toList(),
+    );
   });
 }

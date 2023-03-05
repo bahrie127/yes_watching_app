@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yes_watching_app/features/movies/presentation/bloc/movies_bloc.dart';
 
 import 'package:yes_watching_app/features/trending/presentation/bloc/trending_bloc.dart';
 import 'package:yes_watching_app/features/trending/presentation/pages/trending_page.dart';
@@ -21,6 +22,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 di.locator<TrendingBloc>()..add(GetAllTrendingEvent()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                di.locator<MoviesBloc>()..add(GetPopularMovieEvent()),
           ),
         ],
         child: MaterialApp(

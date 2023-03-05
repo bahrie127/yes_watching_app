@@ -8,7 +8,8 @@ import 'package:yes_watching_app/common/constants.dart';
 import 'package:yes_watching_app/features/trending/data/datasources/trending_remote_datasource.dart';
 import 'package:yes_watching_app/features/trending/data/models/trending_response_model.dart';
 
-import '../../../tranding/data/datasources/tranding_remote_data_source_test.mocks.dart';
+import 'trending_remote_datasource_test.mocks.dart';
+
 
 @GenerateMocks([], customMocks: [MockSpec<http.Client>(as: #MockHttpClient)])
 void main() {
