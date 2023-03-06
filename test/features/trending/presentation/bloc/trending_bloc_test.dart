@@ -66,4 +66,19 @@ void main() {
       const TrendingFailed(message: 'server failure'),
     ],
   );
+
+  blocTest<TrendingBloc, TrendingState>(
+    'should emit [loading, failed] when get trending common failure',
+    build: () {
+      when(mockUsecase.execute()).thenAnswer((realInvocation) async {
+        return const Left(CommonFailure('common failure'));
+      });
+      return trendingBloc;
+    },
+    act: (bloc) => bloc.add(GetAllTrendingEvent()),
+    expect: () => [
+      TrendingLoading(),
+      const TrendingFailed(message: 'common failure'),
+    ],
+  );
 }
